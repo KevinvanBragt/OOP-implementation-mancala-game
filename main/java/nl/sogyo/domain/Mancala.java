@@ -5,13 +5,15 @@ import java.util.Scanner;
 public class Mancala {
 
 	/** facade **/
-
-	Cup startingcup;
+	
+	public Cup startingcup;
 
 	public Mancala() {
-		startingcup = new Pitt(null, 0);
+		this.startingcup = new Pitt(null, 0);
 	}
 
+	/** console methods**/
+	
 	public int takeMove() {
 		Scanner takeMove = new Scanner(System.in);
 		int move = takeMove.nextInt();
@@ -41,15 +43,7 @@ public class Mancala {
 		((Pitt) startingcup.getNextCup(move-1)).giveAwayStones();
 	}
 
-	public boolean validMove(int move) {
-		if ((startingcup.getNextCup(move - 1).getStones() != 0) && (!(startingcup.getNextCup(move-1) instanceof Kalaha)) && (startingcup.getNextCup(move - 1).getOwner().getHasTurn() == true)) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	protected static void drawMancala(Cup startingCup) {
+	public static void drawMancala(Cup startingCup) {
 		
 		System.out.println("\nK 13 12  11  10   9   8 <     Player2 ");
 		System.out.println("-------------------------");
@@ -64,5 +58,34 @@ public class Mancala {
 		System.out.println("\n> 1   2   3   4   5   6 K     Player1 ");
 	}
 
+	/** MVC methods **/
+	
+	public void makeMoveFacade(int selectedCup, Cup startingCup ) {
+
+		if (validMove(selectedCup)) {
+			((Pitt) startingcup.getNextCup(selectedCup-1)).giveAwayStones();
+		}
+		
+	}
+
+	public boolean validMove(int move) {
+		if ((startingcup.getNextCup(move - 1).getStones() != 0) && (!(startingcup.getNextCup(move-1) instanceof Kalaha)) && (startingcup.getNextCup(move - 1).getOwner().getHasTurn() == true)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public int[] getGameState() {
+		int[] gameState = new int[15];
+		
+		for (int x=0; x<14; x++) {
+			gameState[x] = this.startingcup.getNextCup(x).getStones();
+		}
+		if (this.startingcup.getOwner().getHasTurn()) {	gameState[14] = 1;}
+		else { gameState[14] = 0;}	
+		
+		return gameState;
+	}
 	
 }

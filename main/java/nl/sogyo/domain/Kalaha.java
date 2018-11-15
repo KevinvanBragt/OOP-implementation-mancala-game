@@ -23,7 +23,7 @@ class Kalaha extends Cup {
 			stones--;
 			// ended turn in own kalaha, hence turn is not switched. but might have been the
 			// last stones
-			this.checkGameEnd(0, this.getOwner().getPlayerTakingTurn());
+			this.getNextCup().checkGameEnd(0, this.getOwner().getPlayerTakingTurn());
 		} else if (stones >= 1 && this.getOwner().getHasTurn() == false) {
 			// other players kalaha, do not add stone
 			this.getNextCup().passStones(stones);
@@ -56,20 +56,16 @@ class Kalaha extends Cup {
 		if (this.getOwner() != playerTakingTurn) {
 			stones = 0;
 			this.getNextCup().checkGameEnd(stones, playerTakingTurn);
-		} else {
-			if (stones == 0) {
+		} else if (stones == 0 && this.getOwner() == playerTakingTurn){
 				// no more stones in cup, hence use this kalaha to determine winner
 				if (this.getStones() > 24) {
 					System.out.println(this.getOwner().getName() + " has won!");
 				} else if (this.getStones() == 24) {
 					System.out.println("It's a draw!");
-				} else {
+				} else  if(this.getStones() < 24) {
 					System.out.println(this.getOwner().getOpponent().getName() + " has won!");
 				}
-
-			} else {
-			}
+			} 
 		}
-	}
 
 }

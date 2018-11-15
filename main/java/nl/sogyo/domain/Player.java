@@ -19,7 +19,7 @@ public class Player {
 		this.hasTurn = Turn;
 	}
 
-	protected boolean getHasTurn() {
+	public boolean getHasTurn() {
 		return this.hasTurn;
 	}
 	

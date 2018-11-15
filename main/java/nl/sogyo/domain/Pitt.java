@@ -41,7 +41,7 @@ class Pitt extends Cup {
 		stones--;
 		this.addStones(1);
 		
-		if (stones > 0 && (this.getStones() != 1 | this.getOwner().getHasTurn() != true)) {
+		if (stones > 0) {
 			this.getNextCup().passStones(stones);
 		}	
 		else if (stones == 0 && this.getStones() == 1 && this.getOwner().getHasTurn()) {

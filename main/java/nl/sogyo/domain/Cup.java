@@ -1,6 +1,6 @@
 package nl.sogyo.domain;
 
-abstract class Cup {
+public abstract class Cup {
 	
 	private static Cup startingCup;
 	private int stones = 4;
@@ -19,7 +19,7 @@ abstract class Cup {
 		this.stones = stones;
 	}
 	
-	protected final int getStones() {
+	public final int getStones() {
 		return this.stones;
 	}
 	
@@ -31,7 +31,7 @@ abstract class Cup {
 		return this.nextCup;
 	}
 		
-	protected final Cup getNextCup(int x) {
+	public final Cup getNextCup(int x) {
 		// start counting at one time	
 		Cup reference = this;
 		while (x > 0) {
@@ -46,7 +46,7 @@ abstract class Cup {
 		this.owner = owner;
 	}
 	
-	protected final Player getOwner() {
+	public final Player getOwner() {
 		return this.owner;
 	}
 
